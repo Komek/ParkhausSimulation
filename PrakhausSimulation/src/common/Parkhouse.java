@@ -12,13 +12,13 @@ public class Parkhouse {
 	}
 
 	public int getFreeSlots() {
-		return freeSlots;
+		return this.freeSlots;
 	}
 
 	public boolean increaseFreeSlots() {
 		boolean ret = false;
-		if (freeSlots < size) {
-			freeSlots++;
+		if (this.freeSlots < size) {
+			this.freeSlots++;
 			ret = true;
 		}
 		return ret;
@@ -26,19 +26,23 @@ public class Parkhouse {
 
 	public boolean decreaseFreeSlots() {
 		boolean ret = false;
-		if (freeSlots > 0) {
-			freeSlots--;
+		if (this.freeSlots > 0) {
+			this.freeSlots--;
 			ret = true;
 		}
 		return ret;
 	}
 
-	public void setIsFull(boolean pIsFull) {
-		isFull = pIsFull;
+	public void updateStatus() {
+		if (this.freeSlots <= 0) {
+			this.isFull=true;
+		}else {
+			this.isFull=false;
+		}
 	}
 
-	public boolean getIsFull() {
-		return isFull;
+	public boolean isFull() {
+		return this.isFull;
 	}
 
 }

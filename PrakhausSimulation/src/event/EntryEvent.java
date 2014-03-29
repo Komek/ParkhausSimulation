@@ -1,6 +1,8 @@
 package event;
 
 import java.util.TreeSet;
+
+import common.Parkhouse;
 import common.Queue;
 import common.RandomGenerator;
 import common.Terminal;
@@ -14,18 +16,20 @@ public class EntryEvent extends Event {
 
 	@Override
 	public void eventRoutine(Controller controller) {
+		Parkhouse parkhouse = controller.getParkhouse();
 		Queue queueOne = controller.getQueueOne();
 		Queue queueTwo = controller.getQueueTwo();
 		Terminal terminalOne = controller.getTerminalOne();
 		Terminal terminalTwo = controller.getTerminalTwo();
 		RandomGenerator generator = controller.getGenerator();
 		TreeSet<Event> list = controller.getList();
-		
-		//Plane und erstelle neues Event vom eigenen Typ
+
+		// Plane und erstelle neues Event vom eigenen Typ
 		Event newEvent = new EntryEvent(generator.generate());
 		list.add(newEvent);
-		
-		if (queueOne.isFull() & queueTwo.isFull()) {
+		if (parkhouse.isFull()) {
+			controller.increaseMissedCustomer();
+		} else if (queueOne.isFull() & queueTwo.isFull()) {
 			controller.increaseMissedCustomer();
 		} else if (queueOne.isEmpty()) {
 			if (terminalOne.isFree()) {

@@ -1,11 +1,11 @@
 package common;
 
-public enum EType {
+public enum Type {
 	entryEvent("EntryEvent"), terminalOneEndEvent("TerminalOneEndEvent"), terminalTwoEndEvent("TerminalTwoEndEvent"), parkEndEvent("ParkEndEvent");
 	
 	private String type;
 
-	private EType(String type) {
+	private Type(String type) {
 		this.type=type;
 	}
 	

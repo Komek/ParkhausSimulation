@@ -2,18 +2,20 @@ package common;
 
 public class Parkhouse {
 
-	private static boolean isFull = false;
-	private static int freeSlots = 60;
-	private static int size = 60;
+	private boolean isFull = false;
+	private int freeSlots;
+	private int size;
 
-	private Parkhouse() {
+	public Parkhouse(int freeSlots, int size) {
+		this.freeSlots=freeSlots;
+		this.size=size;
 	}
 
-	public static int getFreeSlots() {
+	public int getFreeSlots() {
 		return freeSlots;
 	}
 
-	public static boolean increaseFreeSlots() {
+	public boolean increaseFreeSlots() {
 		boolean ret = false;
 		if (freeSlots < size) {
 			freeSlots++;
@@ -22,7 +24,7 @@ public class Parkhouse {
 		return ret;
 	}
 
-	public static boolean decreaseFreeSlots() {
+	public boolean decreaseFreeSlots() {
 		boolean ret = false;
 		if (freeSlots > 0) {
 			freeSlots--;
@@ -31,11 +33,11 @@ public class Parkhouse {
 		return ret;
 	}
 
-	public static void setIsFull(boolean pIsFull) {
+	public void setIsFull(boolean pIsFull) {
 		isFull = pIsFull;
 	}
 
-	public static boolean getIsFull() {
+	public boolean getIsFull() {
 		return isFull;
 	}
 

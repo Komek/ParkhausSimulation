@@ -4,16 +4,17 @@ public class Terminal {
 
 	private boolean isFree;
 
-	public Terminal() {
-		this.isFree = true;
+	public Terminal(boolean free) {
+		this.isFree = free;
 	}
 
 	public void setTerminal(boolean isFree) {
 		this.isFree = isFree;
 	}
 
-	public boolean isTerminalFree() {
+	public boolean isFree() {
 		return this.isFree;
 	}
+
 
 }

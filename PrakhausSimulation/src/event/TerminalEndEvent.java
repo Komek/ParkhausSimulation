@@ -2,10 +2,10 @@ package event;
 
 import java.util.TreeSet;
 
+import common.Parkhouse;
 import common.Queue;
 import common.RandomGenerator;
 import common.Terminal;
-
 import controller.Controller;
 
 public class TerminalEndEvent extends Event {
@@ -26,19 +26,67 @@ public class TerminalEndEvent extends Event {
 	}
 
 	@Override
-	public void eventRoutine(Controller controller) {
-		Queue queueOne = controller.getQueueOne();
-		Queue queueTwo = controller.getQueueTwo();
-		Terminal terminalOne = controller.getTerminalOne();
-		Terminal terminalTwo = controller.getTerminalTwo();
+	public double eventRoutine(Controller controller) {
 		RandomGenerator generator = controller.getGenerator();
 		TreeSet<Event> list = controller.getList();
-		
-		//Plane und erstelle neues Event vom eigenen Typ
-		Event newEvent = new TerminalEndEvent(generator.generate(),this.flag);
+		double newTime = generator.generate();
+		// Plane und erstelle neues Event vom eigenen Typ
+		Event newEvent = new TerminalEndEvent(newTime, this.flag);
 		list.add(newEvent);
+
+		if (this.flag) {// Terminal One
+			terminalOne(controller);
+		} else { // Terminal Two
+			terminalTwo(controller);
+		}
 		
-		
+		return newTime;
+
+	}
+
+	public void terminalOne(Controller controller) {
+		Parkhouse parkhouse = controller.getParkhouse();
+		Queue queueOne = controller.getQueueOne();
+		Terminal terminalOne = controller.getTerminalOne();
+
+		if (!terminalOne.isFree()) {
+			if (!parkhouse.isFull()) {
+				parkhouse.decreaseFreeSlots();
+				parkhouse.updateStatus();
+				if (!queueOne.isEmpty()) {
+					queueOne.decreaseActualCount();
+				}
+			}
+		} else {
+			if (!queueOne.isEmpty()) {
+				terminalOne.setTerminal(false);
+				queueOne.decreaseActualCount();
+			}
+
+		}
+
+	}
+
+	public void terminalTwo(Controller controller) {
+		Parkhouse parkhouse = controller.getParkhouse();
+		Queue queueTwo = controller.getQueueTwo();
+		Terminal terminalTwo = controller.getTerminalTwo();
+
+		if (!terminalTwo.isFree()) {
+			if (!parkhouse.isFull()) {
+				parkhouse.decreaseFreeSlots();
+				parkhouse.updateStatus();
+				if (!queueTwo.isEmpty()) {
+					queueTwo.decreaseActualCount();
+				}
+			}
+		} else {
+			if (!queueTwo.isEmpty()) {
+				terminalTwo.setTerminal(false);
+				queueTwo.decreaseActualCount();
+			}
+
+		}
 
 	}
 

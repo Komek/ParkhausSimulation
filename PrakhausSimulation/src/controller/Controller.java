@@ -2,6 +2,7 @@ package controller;
 
 import java.util.TreeSet;
 
+import logger.ArrayListLogger;
 import common.Parkhouse;
 import common.Queue;
 import common.RandomGenerator;
@@ -22,12 +23,14 @@ public class Controller {
 	private Parkhouse parkhouse;
 	private RandomGenerator generator;
 	private int missedCustomer;
+	private ArrayListLogger logger;
 
 	public Controller(double simEnd, int queueOneSize, int queueTwoSize,
 			int queueOneCount, int queueTwoCount, boolean terminalOne,
 			boolean terminalTwo, int freeSlots, int parkhouseSize) {
 
 		// Initializing Surrounding
+
 		this.simTime = 0;
 		this.missedCustomer = 0;
 		this.simEnd = simEnd;
@@ -51,16 +54,30 @@ public class Controller {
 		list.add(terminalOneEndEvent);
 		list.add(terminalTwoEndEvent);
 		list.add(parkEndEvent);
+		
+		//Initializing first row of result arrays
+		logger = new ArrayListLogger(entryEvent.getTime(),
+				terminalOneEndEvent.getTime(), terminalTwoEndEvent.getTime(),
+				parkEndEvent.getTime(), queueOneCount, queueTwoCount,
+				freeSlots, terminalOne, terminalTwo, simTime);
 
 	}
 
 	public void simulationRoutine() {
-
 		Event tmpEvent;
+		double newEventTime;
+		double oldEventTime;
+
 		while (simTime < simEnd) {
 			tmpEvent = list.pollFirst();
-			simTime = tmpEvent.getTime();
-			tmpEvent.eventRoutine(this);
+			oldEventTime = tmpEvent.getTime();
+			simTime += oldEventTime;
+			newEventTime = oldEventTime + tmpEvent.eventRoutine(this);
+
+			
+			logger.update(tmpEvent,newEventTime, queueOne.getActualCount(),
+					queueTwo.getActualCount(), parkhouse.getFreeSlots(),
+					terminalOne.isFree(), terminalTwo.isFree(), simTime);
 		}
 		this.presentResult();
 	}

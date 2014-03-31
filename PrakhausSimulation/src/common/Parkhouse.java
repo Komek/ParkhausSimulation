@@ -41,6 +41,14 @@ public class Parkhouse {
 		}
 	}
 
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
 	public boolean isFull() {
 		return this.isFull;
 	}

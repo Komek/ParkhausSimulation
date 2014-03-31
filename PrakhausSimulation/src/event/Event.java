@@ -26,6 +26,6 @@ public abstract class Event implements Comparable<Event> {
 		return 1;
 	}
 
-	public abstract void eventRoutine(Controller controller);
+	public abstract double eventRoutine(Controller controller);
 
 }

@@ -17,7 +17,7 @@ public class RandomGenerator {
 	}
 
 	public double generate() {
-		return 0; // TODO Exponentialverteilung muss zurück gegeben werden
+		return 0.0; // TODO Exponentialverteilung muss zurück gegeben werden
 	}
 
 }

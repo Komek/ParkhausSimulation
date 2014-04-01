@@ -48,7 +48,7 @@ public class ArrayListLogger {
 
 	}
 
-	public void update(Event type, double eventTime, int queueOneCount,
+	public void notify(Event type, double eventTime, int queueOneCount,
 			int queueTwoCount, int freeSlots, boolean terminalOne,
 			boolean terminalTwo, double simTime) {
 
@@ -104,7 +104,7 @@ public class ArrayListLogger {
 	}
 
 	public void addValue(String type, boolean value) {
-		if (type.equals("terminalOneStat")) {
+		if (type.equals("terminalOneState")) {
 			terminalOneStates.add(new Boolean(value));
 		} else if (type.equals("terminalTwoState")) {
 			terminalTwoStates.add(new Boolean(value));

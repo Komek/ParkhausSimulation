@@ -75,17 +75,101 @@ public class Controller {
 			newEventTime = oldEventTime + tmpEvent.eventRoutine(this);
 
 			
-			logger.update(tmpEvent,newEventTime, queueOne.getActualCount(),
+			logger.notify(tmpEvent,newEventTime, queueOne.getActualCount(),
 					queueTwo.getActualCount(), parkhouse.getFreeSlots(),
 					terminalOne.isFree(), terminalTwo.isFree(), simTime);
 		}
-		this.presentResult();
+		
 	}
 
-	public void presentResult() {
-		System.out.println("Simulation End"); // TODO Impl fwd to FE!
+	public ArrayListLogger giveResults() {
+		return this.logger;
+	}
+	
+	public boolean setTestResults(){
+	
+		logger.addValue("entryTime", 1);
+		logger.addValue("entryTime", 1);
+		logger.addValue("entryTime", 1);
+		logger.addValue("entryTime", 4);
+		logger.addValue("entryTime", 4);
+		logger.addValue("entryTime", 4);
+		
+	
+		logger.addValue("terminalOneTime", 0.6);
+		logger.addValue("terminalOneTime", 0.6);
+		logger.addValue("terminalOneTime", 2.9);
+		logger.addValue("terminalOneTime", 2.9);
+		logger.addValue("terminalOneTime", 2.9);
+		logger.addValue("terminalOneTime", 4.9);
+		
+	
+		logger.addValue("terminalTwoTime", 0.4);
+		logger.addValue("terminalTwoTime", 4.9);
+		logger.addValue("terminalTwoTime", 4.9);
+		logger.addValue("terminalTwoTime", 4.9);
+		logger.addValue("terminalTwoTime", 4.9);
+		logger.addValue("terminalTwoTime", 4.9);
+		
+		
+		logger.addValue("parkEndTime", 1.9);
+		logger.addValue("parkEndTime", 1.9);
+		logger.addValue("parkEndTime", 1.9);
+		logger.addValue("parkEndTime", 1.9);
+		logger.addValue("parkEndTime", 4.9);
+		logger.addValue("parkEndTime", 4.9);
+		
+		logger.addValue("simulationTime", 0.1);
+		logger.addValue("simulationTime", 0.4);
+		logger.addValue("simulationTime", 0.6);
+		logger.addValue("simulationTime", 1);
+		logger.addValue("simulationTime", 1.9);
+		logger.addValue("simulationTime", 2.9);
+		
+		logger.addValue("queueOne", 0);
+		logger.addValue("queueOne", 0);
+		logger.addValue("queueOne", 0);
+		logger.addValue("queueOne", 0);
+		logger.addValue("queueOne", 0);
+		logger.addValue("queueOne", 0);
+		
+		logger.addValue("queueTwo", 0);
+		logger.addValue("queueTwo", 0);
+		logger.addValue("queueTwo", 0);
+		logger.addValue("queueTwo", 0);
+		logger.addValue("queueTwo", 0);
+		logger.addValue("queueTwo", 0);
+		
+		logger.addValue("freeSlotsCount", 60);
+		logger.addValue("freeSlotsCount", 60);
+		logger.addValue("freeSlotsCount", 60);
+		logger.addValue("freeSlotsCount", 60);
+		logger.addValue("freeSlotsCount", 60);
+		logger.addValue("freeSlotsCount", 59);
+		
+		logger.addValue("terminalOneState", false);
+		logger.addValue("terminalOneState", false);
+		logger.addValue("terminalOneState", false);
+		logger.addValue("terminalOneState", false);
+		logger.addValue("terminalOneState", true);
+		logger.addValue("terminalOneState", true);
+		
+		
+		logger.addValue("terminalTwoState", false);
+		logger.addValue("terminalTwoState", false);
+		logger.addValue("terminalTwoState", false);
+		logger.addValue("terminalTwoState", false);
+		logger.addValue("terminalTwoState", false);
+		logger.addValue("terminalTwoState", false);
+		
+		return true;
+		
+		
 	}
 
+	public void increaseMissedCustomer() {
+		this.missedCustomer++;
+	}
 	public TreeSet<Event> getList() {
 		return list;
 	}
@@ -158,8 +242,6 @@ public class Controller {
 		this.generator = generator;
 	}
 
-	public void increaseMissedCustomer() {
-		this.missedCustomer++;
-	}
+	
 
 }

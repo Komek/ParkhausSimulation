@@ -1,7 +1,7 @@
 package common;
 
 public class Queue {
-	private int actualCount = 0;
+	private int actualCount;
 	private int size;
 
 	public Queue(int size, int actualCount) {
